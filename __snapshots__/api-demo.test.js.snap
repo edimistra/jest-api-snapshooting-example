@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Get all Ads 1`] = `
+exports[`Run all API tests Get all Ads 1`] = `
 Object {
   "config": Object {
     "adapter": [Function],
@@ -23,24 +23,9 @@ Object {
     "xsrfCookieName": "XSRF-TOKEN",
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
-  "data": Array [
-    Object {
-      "_id": "6070ba817f6d8ead2695cfca",
-      "title": "Hello, now from the in-memory database!",
-    },
-    Object {
-      "_id": "6070ba887f6d8ead2695cfcb",
-      "price": 10.5,
-      "title": "Pizza",
-    },
-    Object {
-      "_id": "6070baa07f6d8ead2695cfcc",
-      "price": 10.5,
-      "title": "Pizza",
-    },
-  ],
+  "data": Array [],
   "headers": Object {
-    "content-length": "214",
+    "content-length": "2",
     "content-type": "application/json; charset=utf-8",
   },
   "request": XMLHttpRequest {},
@@ -49,7 +34,7 @@ Object {
 }
 `;
 
-exports[`Insert a new Ad 1`] = `
+exports[`Run all API tests Insert a new Ad 1`] = `
 Object {
   "config": Object {
     "adapter": [Function],
