@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const {startDatabase} = require('./database/mongo');
-const {insertAd, getAds, deleteAd, updateAd} = require('./database/ads');
+const { startDatabase } = require('./database/mongo');
+const { insertAd, getAds, deleteAd, updateAd } = require('./database/ads');
 
 // defining the Express app
 const app = express();
@@ -24,8 +24,8 @@ app.use(morgan('combined'));
 
 // defining an endpoint to return all ads
 app.get('/', async (req, res) => {
-    res.send(await getAds());
-  });
+  res.send(await getAds());
+});
 
 app.post('/', async (req, res) => {
   const newAd = req.body;
@@ -47,34 +47,34 @@ app.put('/:id', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const newAd = req.body;
-    await insertAd(newAd);
-    res.send({ message: 'New ad inserted.' });
+  const newAd = req.body;
+  await insertAd(newAd);
+  res.send({ message: 'New ad inserted.' });
 });
-  
+
 // endpoint to delete an ad
 app.delete('/:id', async (req, res) => {
-    await deleteAd(req.params.id);
-    res.send({ message: 'Ad removed.' });
+  await deleteAd(req.params.id);
+  res.send({ message: 'Ad removed.' });
 });
-  
+
 // endpoint to update an ad
 app.put('/:id', async (req, res) => {
-    const updatedAd = req.body;
-    await updateAd(req.params.id, updatedAd);
-    res.send({ message: 'Ad updated.' });
+  const updatedAd = req.body;
+  await updateAd(req.params.id, updatedAd);
+  res.send({ message: 'Ad updated.' });
 });
 
 module.exports = {
-    server: async function() {
-        await startDatabase();
-    
-        // starting the server
-        app.listen(3001, () => {
-            console.log('listening on port 3001');
-        });
-    },
-    close: function() {
-        app.close()
-    }
-}
+  server: async function () {
+    await startDatabase();
+
+    // starting the server
+    app.listen(3001, () => {
+      console.log('listening on port 3001');
+    });
+  },
+  close: function () {
+    app.close();
+  },
+};
