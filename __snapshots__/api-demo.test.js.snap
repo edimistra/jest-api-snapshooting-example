@@ -25,32 +25,22 @@ Object {
   },
   "data": Array [
     Object {
-      "_id": "6070af1694e2e3a8a1c47bb4",
+      "_id": "6070ba817f6d8ead2695cfca",
       "title": "Hello, now from the in-memory database!",
     },
     Object {
-      "_id": "6070afed94e2e3a8a1c47bb6",
+      "_id": "6070ba887f6d8ead2695cfcb",
       "price": 10.5,
       "title": "Pizza",
     },
     Object {
-      "_id": "6070b15e94e2e3a8a1c47bb7",
-      "price": 10.5,
-      "title": "Pizza",
-    },
-    Object {
-      "_id": "6070b1e494e2e3a8a1c47bb8",
-      "price": 10.5,
-      "title": "Pizza",
-    },
-    Object {
-      "_id": "6070b4f294e2e3a8a1c47bb9",
+      "_id": "6070baa07f6d8ead2695cfcc",
       "price": 10.5,
       "title": "Pizza",
     },
   ],
   "headers": Object {
-    "content-length": "342",
+    "content-length": "214",
     "content-type": "application/json; charset=utf-8",
   },
   "request": XMLHttpRequest {},
