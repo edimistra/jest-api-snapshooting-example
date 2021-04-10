@@ -23,9 +23,15 @@ Object {
     "xsrfCookieName": "XSRF-TOKEN",
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
-  "data": Array [],
+  "data": Array [
+    Object {
+      "_id": "607204a188800c458bf52a8f",
+      "price": 1.3,
+      "title": "Soap",
+    },
+  ],
   "headers": Object {
-    "content-length": "2",
+    "content-length": "63",
     "content-type": "application/json; charset=utf-8",
   },
   "request": XMLHttpRequest {},
@@ -59,10 +65,32 @@ Object {
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
   "data": Object {
+    "ad": Object {
+      "connection": Object {
+        "host": "127.0.0.1",
+        "id": 0,
+        "port": 54652,
+      },
+      "insertedCount": 1,
+      "insertedId": "607204a188800c458bf52a90",
+      "n": 1,
+      "ok": 1,
+      "ops": Array [
+        Object {
+          "_id": "607204a188800c458bf52a90",
+          "price": 10.5,
+          "title": "Pizza",
+        },
+      ],
+      "result": Object {
+        "n": 1,
+        "ok": 1,
+      },
+    },
     "message": "New ad inserted.",
   },
   "headers": Object {
-    "content-length": "30",
+    "content-length": "258",
     "content-type": "application/json; charset=utf-8",
   },
   "request": XMLHttpRequest {},

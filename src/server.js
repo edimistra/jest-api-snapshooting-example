@@ -22,34 +22,15 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
+// endpoint to insert new items
+app.post('/', async (req, res) => {
+  const newAd = await insertAd(req.body);
+  res.send({ message: 'New ad inserted.', ad: newAd });
+});
+
 // defining an endpoint to return all ads
 app.get('/', async (req, res) => {
   res.send(await getAds());
-});
-
-app.post('/', async (req, res) => {
-  const newAd = req.body;
-  await insertAd(newAd);
-  res.send({ message: 'New ad inserted.' });
-});
-
-// endpoint to delete an ad
-app.delete('/:id', async (req, res) => {
-  await deleteAd(req.params.id);
-  res.send({ message: 'Ad removed.' });
-});
-
-// endpoint to update an ad
-app.put('/:id', async (req, res) => {
-  const updatedAd = req.body;
-  await updateAd(req.params.id, updatedAd);
-  res.send({ message: 'Ad updated.' });
-});
-
-app.post('/', async (req, res) => {
-  const newAd = req.body;
-  await insertAd(newAd);
-  res.send({ message: 'New ad inserted.' });
 });
 
 // endpoint to delete an ad
