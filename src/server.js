@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const { startDatabase } = require('./database/mongo');
+const { startDatabase, shutdownDatabase } = require('./database/mongo');
 const { insertAd, getAds, deleteAd, updateAd } = require('./database/ads');
 
 // defining the Express app
@@ -65,16 +65,26 @@ app.put('/:id', async (req, res) => {
   res.send({ message: 'Ad updated.' });
 });
 
+let serverInstance;
+
 module.exports = {
   server: async function () {
     await startDatabase();
 
     // starting the server
-    app.listen(3001, () => {
+    serverInstance = app.listen(3001, () => {
       console.log('listening on port 3001');
     });
   },
-  close: function () {
-    app.close();
+  close: async function () {
+    return new Promise(async (res) => {
+      await shutdownDatabase();
+
+      serverInstance.close((err) => {
+        if (err) rej(err);
+        console.log('server closed');
+        res();
+      });
+    });
   },
 };

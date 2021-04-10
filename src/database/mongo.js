@@ -2,17 +2,20 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const { MongoClient } = require('mongodb');
 
+let mongo = null;
 let database = null;
 
 async function startDatabase() {
-  const mongo = new MongoMemoryServer();
-  const dbPath = await mongo.getDbPath();
-  console.log(dbPath);
+  mongo = new MongoMemoryServer();
   const mongoDBURL = await mongo.getConnectionString();
   const connection = await MongoClient.connect(mongoDBURL, {
     useNewUrlParser: true,
   });
   database = connection.db();
+}
+
+async function shutdownDatabase() {
+  return mongo.stop();
 }
 
 async function getDatabase() {
@@ -23,4 +26,5 @@ async function getDatabase() {
 module.exports = {
   getDatabase,
   startDatabase,
+  shutdownDatabase,
 };

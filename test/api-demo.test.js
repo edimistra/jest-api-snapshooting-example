@@ -1,6 +1,6 @@
 const { expect, test } = require('@jest/globals');
 const axios = require('axios');
-const { server, close } = require('./src/server');
+const { server, close } = require('../src/server');
 
 function sanitize(data, keys) {
   return keys.reduce((result, key) => {
@@ -18,20 +18,13 @@ describe('Run all API tests', () => {
     await server();
   });
 
-  afterAll(() => {
-    close();
+  afterAll(async () => {
+    await close();
   });
 
-  test('Get all Ads', (done) => {
-    axios.get('http://localhost:3001').then(
-      (response) => {
-        expect(response).toMatchSnapshot();
-        done();
-      },
-      (error) => {
-        done(error);
-      },
-    );
+  test('Get all Ads', async () => {
+    const response = await axios.get('http://localhost:3001');
+    expect(response).toMatchSnapshot();
   });
 
   test('Insert a new Ad', async () => {
