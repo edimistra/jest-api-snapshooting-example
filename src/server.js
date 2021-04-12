@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const { startDatabase } = require('./database/mongo');
+const { startDatabase, shutdownDatabase } = require('./database/mongo');
 const { insertAd, getAds, deleteAd, updateAd } = require('./database/ads');
 
 // defining the Express app
@@ -22,17 +22,17 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
+// endpoint to insert new items
+app.post('/', async (req, res) => {
+  const newAd = await insertAd(req.body);
+  res.send({ message: 'New ad inserted.', ad: newAd });
+});
+
 // defining an endpoint to return all ads
 app.get('/', async (req, res) => {
   res.send(await getAds());
 });
 
-app.post('/', async (req, res) => {
-  const newAd = req.body;
-  await insertAd(newAd);
-  res.send({ message: 'New ad inserted.' });
-});
-
 // endpoint to delete an ad
 app.delete('/:id', async (req, res) => {
   await deleteAd(req.params.id);
@@ -46,35 +46,26 @@ app.put('/:id', async (req, res) => {
   res.send({ message: 'Ad updated.' });
 });
 
-app.post('/', async (req, res) => {
-  const newAd = req.body;
-  await insertAd(newAd);
-  res.send({ message: 'New ad inserted.' });
-});
-
-// endpoint to delete an ad
-app.delete('/:id', async (req, res) => {
-  await deleteAd(req.params.id);
-  res.send({ message: 'Ad removed.' });
-});
-
-// endpoint to update an ad
-app.put('/:id', async (req, res) => {
-  const updatedAd = req.body;
-  await updateAd(req.params.id, updatedAd);
-  res.send({ message: 'Ad updated.' });
-});
+let serverInstance;
 
 module.exports = {
   server: async function () {
     await startDatabase();
 
     // starting the server
-    app.listen(3001, () => {
+    serverInstance = app.listen(3001, () => {
       console.log('listening on port 3001');
     });
   },
-  close: function () {
-    app.close();
+  close: async function () {
+    return new Promise(async (res) => {
+      await shutdownDatabase();
+
+      serverInstance.close((err) => {
+        if (err) rej(err);
+        console.log('server closed');
+        res();
+      });
+    });
   },
 };
