@@ -1,5 +1,5 @@
-const server = require('./server');
+const { server } = require('./server');
 
-server.server().then(() => {
+server().then(() => {
   console.log('Server is running');
 });

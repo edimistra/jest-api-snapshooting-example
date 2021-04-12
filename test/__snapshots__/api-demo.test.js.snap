@@ -25,7 +25,7 @@ Object {
   },
   "data": Array [
     Object {
-      "_id": "6074a27235cd54cce87afbbf",
+      "_id": "[SANITIZED]",
       "price": 1.3,
       "title": "Soap",
     },
@@ -69,15 +69,15 @@ Object {
       "connection": Object {
         "host": "127.0.0.1",
         "id": 0,
-        "port": 51456,
+        "port": "[SANITIZED]",
       },
       "insertedCount": 1,
-      "insertedId": "6074a27235cd54cce87afbc0",
+      "insertedId": "[SANITIZED]",
       "n": 1,
       "ok": 1,
       "ops": Array [
         Object {
-          "_id": "6074a27235cd54cce87afbc0",
+          "_id": "[SANITIZED]",
           "price": 10.5,
           "title": "Pizza",
         },

@@ -32,19 +32,31 @@ describe('Run all API tests', () => {
 
     // get all items
     const response = await axios.get('http://localhost:3001');
-    expect(response).toMatchSnapshot();
+
+    // sanitizing deep properties on the response
+    const sanitizedKeys = ['data[0]._id'];
+    const sanitizedResponse = sanitize(response, sanitizedKeys);
+
+    // verify the response
+    expect(sanitizedResponse).toMatchSnapshot();
   });
 
   test('Insert a new Ad', async () => {
     // insert brand new item
-    let response = await axios.post('http://localhost:3001', {
+    const response = await axios.post('http://localhost:3001', {
       title: 'Pizza',
       price: 10.5,
     });
 
-    response = sanitize(response, ['_id', 'port', 'insertedId']);
+    // sanitizing deep properties on the response
+    const sanitizedKeys = [
+      'data.ad.ops[0]._id',
+      'data.ad.connection.port',
+      'data.ad.insertedId',
+    ];
+    const sanitizedResponse = sanitize(response, sanitizedKeys);
 
     // verify the response
-    expect(response).toMatchSnapshot();
+    expect(sanitizedResponse).toMatchSnapshot();
   });
 });
