@@ -1,6 +1,7 @@
 const { expect, test } = require('@jest/globals');
 const axios = require('axios');
 const { server, close } = require('../src/server');
+const _ = require('lodash');
 
 function sanitize(data, keys) {
   return keys.reduce((result, key) => {
@@ -36,10 +37,12 @@ describe('Run all API tests', () => {
 
   test('Insert a new Ad', async () => {
     // insert brand new item
-    const response = await axios.post('http://localhost:3001', {
+    let response = await axios.post('http://localhost:3001', {
       title: 'Pizza',
       price: 10.5,
     });
+
+    response = sanitize(response, ['_id', 'port', 'insertedId']);
 
     // verify the response
     expect(response).toMatchSnapshot();
