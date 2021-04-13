@@ -10,8 +10,8 @@ The POST test is sanitized with a Lodash call  in order to avoid the snapshottin
 - test folder: contains the __snapshots__ folder and the Jest demo spec with the GET and POST tests.
 
 # More info:
-[Node.js and Express Tutorial:] (https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis)
+Node.js and Express Tutorial: https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis
 
-[Jest snapshot testing docs:] (https://jestjs.io/docs/snapshot-testing)
+Jest snapshot testing docs: https://jestjs.io/docs/snapshot-testing
 
-[Snapshot Testing APIs with Jest:] (https://daveceddia.com/snapshot-testing-apis-with-jest/)
+Snapshot Testing APIs with Jest: https://daveceddia.com/snapshot-testing-apis-with-jest
